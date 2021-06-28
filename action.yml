@@ -1,0 +1,15 @@
+name: "flaky test analyzer"
+description: "print flakiness scores"
+inputs:
+  test-history-url:
+    description: "test_history.csv url for Pandas read_csv"
+    required: true
+  top-n:
+    description: "integer value for how many tests should be printed out"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.test-history-url }}
+    - ${{ inputs.top-n }}

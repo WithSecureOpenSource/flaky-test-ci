@@ -1,0 +1,26 @@
+name: flaky-test-analysis
+
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          pip install .
+      - name: Run tests
+        run: pytest
+      - name: Print flaky statistics
+        if: always()
+        uses: ./
+        with:
+          test-history-url: https://raw.githubusercontent.com/guotin/flaky-test-ci/main/test_history.csv
+          top-n: 5

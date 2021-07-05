@@ -1,0 +1,20 @@
+name: flaky-test-analysis
+
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Print flaky test analysis
+        if: always()
+        uses: ./
+        with:
+          args: --test-history-csv=test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5

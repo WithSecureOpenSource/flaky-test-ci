@@ -1,4 +1,4 @@
-name: flaky-test-analysis
+name: test-results-archive
 
 on:
   workflow_dispatch:
@@ -17,10 +17,10 @@ jobs:
         run: |
           pip install .
       - name: Run tests
-        run: pytest
-      - name: Print flaky statistics
+        run: pytest --junit-xml=test_results.xml
+      - name: Upload test results
         if: always()
-        uses: ./
+        uses: actions/upload-artifact@v2
         with:
-          test-history-url: https://raw.githubusercontent.com/guotin/flaky-test-ci/main/test_history.csv
-          top-n: 5
+          name: test-results
+          path: test_results.xml

@@ -13,8 +13,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Print flaky test analysis
-        if: always()
+      - name: Flaky test scores - grouping by days example with test_history.csv
         uses: guotin/fliprate_actions@master
         with:
           args: --test-history-csv=example_history/test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5
+      - name: Flaky test scores - grouping by runs example with JUnit files
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --junit-files=example_history/junit_files --grouping-option=runs --window-size=5 --window-count=3 --top-n=5

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="5" time="0.107" timestamp="2021-07-06T10:59:33.519182" hostname="eero-thinkpad"><testcase classname="example_tests.test_example" name="test_passing_always" time="0.001" /><testcase classname="example_tests.test_example" name="test_failing_always" time="0.001"><failure message="assert False">&gt;   ???
+E   assert False
+
+/home/eero/Desktop/flaky-test-ci/tests/test_example.py:9: AssertionError</failure></testcase><testcase classname="example_tests.test_example" name="test_random_10percent_fail" time="0.000" /><testcase classname="example_tests.test_example" name="test_random_50percent_fail" time="0.001"><failure message="assert 0.6678823575375391 &lt;= 0.5&#10; +  where 0.6678823575375391 = &lt;built-in method random of Random object at 0x558df7e0abd0&gt;()&#10; +    where &lt;built-in method random of Random object at 0x558df7e0abd0&gt; = random.random">&gt;   ???
+E   assert 0.6678823575375391 &lt;= 0.5
+E    +  where 0.6678823575375391 = &lt;built-in method random of Random object at 0x558df7e0abd0&gt;()
+E    +    where &lt;built-in method random of Random object at 0x558df7e0abd0&gt; = random.random
+
+/home/eero/Desktop/flaky-test-ci/tests/test_example.py:17: AssertionError</failure></testcase><testcase classname="example_tests.test_example" name="test_random_25percent_fail" time="0.001"><failure message="assert 0.8107108374448312 &lt;= 0.75&#10; +  where 0.8107108374448312 = &lt;built-in method random of Random object at 0x558df7e0abd0&gt;()&#10; +    where &lt;built-in method random of Random object at 0x558df7e0abd0&gt; = random.random">&gt;   ???
+E   assert 0.8107108374448312 &lt;= 0.75
+E    +  where 0.8107108374448312 = &lt;built-in method random of Random object at 0x558df7e0abd0&gt;()
+E    +    where &lt;built-in method random of Random object at 0x558df7e0abd0&gt; = random.random
+
+/home/eero/Desktop/flaky-test-ci/tests/test_example.py:21: AssertionError</failure></testcase></testsuite></testsuites>

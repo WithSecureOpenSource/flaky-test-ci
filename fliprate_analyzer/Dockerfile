@@ -2,7 +2,9 @@ FROM python:3.9-slim-buster
 
 WORKDIR /app
 
-RUN pip install pandas junitparser
+COPY setup.py /setup.py
+
+RUN pip install .
 
 COPY check_flakes.py /check_flakes.py
 

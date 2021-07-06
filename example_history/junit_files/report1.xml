@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="5" time="0.103" timestamp="2021-07-06T10:59:29.568302" hostname="eero-thinkpad"><testcase classname="example_tests.test_example" name="test_passing_always" time="0.000" /><testcase classname="example_tests.test_example" name="test_failing_always" time="0.001"><failure message="assert False">&gt;   ???
+E   assert False
+
+/home/eero/Desktop/flaky-test-ci/tests/test_example.py:9: AssertionError</failure></testcase><testcase classname="example_tests.test_example" name="test_random_10percent_fail" time="0.001"><failure message="assert 0.9914651854123082 &lt;= 0.9&#10; +  where 0.9914651854123082 = &lt;built-in method random of Random object at 0x5602f8794bd0&gt;()&#10; +    where &lt;built-in method random of Random object at 0x5602f8794bd0&gt; = random.random">&gt;   ???
+E   assert 0.9914651854123082 &lt;= 0.9
+E    +  where 0.9914651854123082 = &lt;built-in method random of Random object at 0x5602f8794bd0&gt;()
+E    +    where &lt;built-in method random of Random object at 0x5602f8794bd0&gt; = random.random
+
+/home/eero/Desktop/flaky-test-ci/tests/test_example.py:13: AssertionError</failure></testcase><testcase classname="example_tests.test_example" name="test_random_50percent_fail" time="0.000" /><testcase classname="example_tests.test_example" name="test_random_25percent_fail" time="0.000" /></testsuite></testsuites>

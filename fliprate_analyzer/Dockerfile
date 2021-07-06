@@ -1,13 +1,9 @@
 FROM python:3.9-slim-buster
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY setup.py /setup.py
+COPY . .
 
 RUN pip install .
 
-COPY check_flakes.py /check_flakes.py
-
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

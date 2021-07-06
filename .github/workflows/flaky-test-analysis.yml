@@ -15,6 +15,6 @@ jobs:
           python-version: 3.8
       - name: Print flaky test analysis
         if: always()
-        uses: ./
+        uses: ./fliprate_analyzer/
         with:
-          args: --test-history-csv=test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5
+          args: --test-history-csv=example_history/test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5

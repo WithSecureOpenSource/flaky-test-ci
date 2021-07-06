@@ -1,2 +1,2 @@
 #!/bin/sh
-python check_flakes.py $*
+python ../check_flakes.py $*

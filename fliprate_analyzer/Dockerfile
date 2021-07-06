@@ -1,9 +1,11 @@
 FROM python:3.9-slim-buster
 
-WORKDIR /usr/src/app
+COPY . /usr/src/app
 
-COPY . .
+WORKDIR /usr/src/app
 
 RUN pip install .
 
-ENTRYPOINT ["./entrypoint.sh"]
+WORKDIR /usr/src/app/files
+
+ENTRYPOINT ["../entrypoint.sh"]

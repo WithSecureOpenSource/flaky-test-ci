@@ -15,3 +15,5 @@ htmlcov
 build
 dist
 *.json
+*.zip
+*.xml

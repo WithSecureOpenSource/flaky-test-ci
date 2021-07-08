@@ -2,9 +2,12 @@ name: flaky-test-analysis
 
 on:
   workflow_dispatch:
+
+permissions: read-all
+
 jobs:
-  test:
-    name: test
+  analysis:
+    name: flake-score-examples
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,3 +24,13 @@ jobs:
         uses: guotin/fliprate_actions@master
         with:
           args: --junit-files=example_history/junit_files --grouping-option=runs --window-size=5 --window-count=3 --top-n=5
+      - name: Download workflow artifacts
+        run: |
+          pip install requests
+          python download_artifacts.py https://api.github.com/repos/guotin/flaky-test-ci/actions/artifacts ${{ secrets.GITHUB_TOKEN }}
+      - name: Check files
+        run: ls
+      - name: Flaky test scores - grouping by runs example with downloaded workflow artifacts
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --junit-files=./ --grouping-option=runs --window-size=2 --window-count=3 --top-n=5

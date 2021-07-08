@@ -32,4 +32,4 @@ for archive_path in glob.iglob("./*.zip"):
     os.rename("./test_results.xml", f"./report{i}.xml")
     i += 1
 
-print("unpacked all artifacts")
+print(f"unpacked {i} artifacts")

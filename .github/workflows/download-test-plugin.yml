@@ -1,0 +1,23 @@
+name: artifact-download-with-plugin
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Download with plugin
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: test-results-archive.yml
+          workflow_conclusion: completed
+      - name: Check
+        run: ls

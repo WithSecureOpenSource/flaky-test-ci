@@ -18,9 +18,13 @@ jobs:
           pip install -r requirements.txt
       - name: Run tests
         run: pytest --junit-xml=test_results.xml
+      - name: Set current date as env variable
+        if: always()
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H-%M-%S')"
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
+          name: test-results-${{ steps.date.outputs.date }}
           path: test_results.xml

@@ -6,7 +6,7 @@ Demonstrate usage of [Github Actions Plugin for test fliprate calculations](http
 
 * Analysis workflow to demonstrate the usage of the plugin
     * Examples with existing `test_history.csv` and `JUnit` test result files
-    * Example with downloading artifacts as `JUnit` files (to be added)
+    * Example with downloading artifacts as `JUnit` files
 * Workflow that runs example test set with `pytest`, produces `report.xml` in `JUnit` format and uploads the artifact for later analysis 
 
 ### Scripts to generate test history

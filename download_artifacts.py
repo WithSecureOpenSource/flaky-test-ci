@@ -7,12 +7,16 @@ import os
 
 ARTIFACTS_URL = sys.argv[1]
 GITHUB_TOKEN = sys.argv[2]
+ARTIFACT_NAME = sys.argv[3]
 
 response = requests.get(ARTIFACTS_URL)
 data = response.json()
 i = 0
 for artifact in data["artifacts"]:
     download_url = artifact["archive_download_url"]
+    artifact_name = artifact["name"]
+    if artifact_name != ARTIFACT_NAME:
+        continue
     print("Artifact download url:", download_url)
     artifact_response = requests.get(
         download_url,

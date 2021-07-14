@@ -1,0 +1,45 @@
+name: full-workflow
+
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run tests
+        run: pytest --junit-xml=test_results_new.xml
+      - name: Download previous test results
+        if: always()
+        run: |
+          python download_artifacts.py https://api.github.com/repos/guotin/flaky-test-ci/actions/artifacts ${{ secrets.GITHUB_TOKEN }} test-results-full-workflow
+      - name: Flaky test analysis and heatmaps - grouping by 2 runs - 10 runs history
+        if: always()
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --junit-files=. --grouping-option=runs --window-size=2 --window-count=5 --top-n=5 --heatmap
+      - name: Rename new test results like previous before upload
+        if: always()
+        run: mv test_results_new.xml test_results.xml
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results-full-workflow
+          path: ./test_results.xml
+      - name: Upload heatmaps
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: heatmaps
+          path: |
+            *.png

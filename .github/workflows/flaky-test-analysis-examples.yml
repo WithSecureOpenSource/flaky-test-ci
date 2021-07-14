@@ -1,0 +1,31 @@
+name: flaky-test-analysis-examples
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analysis:
+    name: flake-score-examples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Flaky test scores and heatmaps - grouping by days example with test_history.csv
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --test-history-csv=example_history/test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5 --heatmap
+      - name: Flaky test scores and heatmaps - grouping by runs example with JUnit files
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --junit-files=example_history/junit_files --grouping-option=runs --window-size=5 --window-count=3 --top-n=5 --heatmap
+      - name: Upload heatmaps
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: heatmaps
+          path: |
+            *.png

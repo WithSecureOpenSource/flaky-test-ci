@@ -1,0 +1,50 @@
+name: full-workflow-with-download-plugin
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Set current date as env variable
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H-%M-%S')"
+      - name: Run tests
+        run: pytest --junit-xml=test_results-${{ steps.date.outputs.date }}.xml
+      - name: Download previous test results with plugin
+        if: always()
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: full-workflow-with-download-plugin.yml
+          name: test-results-all
+          workflow_conclusion: completed
+      - name: Flaky test analysis and heatmaps - grouping by 2 runs - 10 runs history
+        if: always()
+        uses: guotin/fliprate_actions@master
+        with:
+          args: --junit-files=. --grouping-option=runs --window-size=2 --window-count=5 --top-n=5 --heatmap
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results-all
+          path: |
+            *.xml
+      - name: Upload heatmaps
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: heatmaps
+          path: |
+            *.png

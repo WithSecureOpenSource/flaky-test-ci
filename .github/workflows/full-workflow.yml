@@ -24,7 +24,7 @@ jobs:
           python download_artifacts.py https://api.github.com/repos/f-secure/flaky-test-ci/actions/artifacts ${{ secrets.GITHUB_TOKEN }} test-results-full-workflow
       - name: Flaky test analysis and heatmaps - grouping by 2 runs - 10 runs history
         if: always()
-        uses: guotin/fliprate_actions@master
+        uses: F-Secure/flaky-tests-detection@master
         with:
           args: --junit-files=. --grouping-option=runs --window-size=2 --window-count=5 --top-n=5 --heatmap
       - name: Rename new test results like previous before upload

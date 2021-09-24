@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: 3.9
       - name: Flaky test scores and heatmaps - grouping by days example with test_history.csv
-        uses: guotin/fliprate_actions@master
+        uses: F-Secure/flaky-tests-detection@master
         with:
           args: --test-history-csv=example_history/test_history.csv --grouping-option=days --window-size=1 --window-count=7 --top-n=5 --heatmap
       - name: Flaky test scores and heatmaps - grouping by runs example with JUnit files
